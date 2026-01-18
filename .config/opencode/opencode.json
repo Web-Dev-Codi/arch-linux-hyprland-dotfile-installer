@@ -1,0 +1,78 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  // Theme configuration
+  "theme": "opencode",
+  "model": "llama3.2:latest",
+  "permission": {
+    "edit": "allow",
+    "bash": "ask",
+    "webfetch": "allow",
+    "bash": "allow",
+    "read": "allow",
+    "grep": "allow",
+    "glob": "allow",
+    "list": "allow",
+    "lsp": "allow",
+    "skill": "allow",
+    "todowrite": "allow",
+    "todoread": "allow",
+    "question": "allow"
+  },
+  "mcp": {
+    "context7": {
+      "url": "https://mcp.context7.com/mcp",
+      "headers": {
+        "CONTEXT7_API_KEY": "ctx7sk-8521f5a0-ee16-4bd7-a580-6b7dc3a9bf60"
+      }
+    },
+    "sequential-thinking": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"]
+    },
+    "perplexity": {
+      "command": "npx",
+      "args": ["-y", "@perplexity-ai/mcp-server"],
+      "env": {
+        "PERPLEXITY_API_KEY": "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"
+      }
+    }
+  },
+  "autoupdate": true,
+  "provider": {
+    "ollama": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "Ollama (local)",
+      "options": {
+        "baseURL": "http://localhost:11434/v1"
+      },
+      "models": {
+        "llama3.2:latest": {
+          "name": "llama 3:2 Latest"
+        },
+        "magistral:24b": {
+          "name": "magistral 24B"
+        },
+        "ministral-7b:latest": {
+          "name": "ministral 7B Latest"
+        },
+        "ministral-3:latest": {
+          "name": "ministral Latest"
+        },
+        "mistral:latest": {
+          "name": "mistral Latest"
+        },
+        "novaforgeai/deepseek-coder:6.7b-optimized": {
+          "name": "DeepSeek Coder 6.7B Optimized"
+        },
+        "qwen2.5-coder:14b": {
+          "name": "Qwen2.5 Coder 14B"
+        },
+        "qwen3-vl:8b": {
+          "name": "Qwen3 VL 8B"
+        },
+        "qwen3:14b": {
+          "name": "Qwen3 14B"
+        }
+    }
+  }
+}
