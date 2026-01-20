@@ -1,0 +1,102 @@
+{
+  "cachedStatsigGates": {
+    "tengu_prompt_suggestion": true
+  },
+  "cachedGrowthBookFeatures": {
+    "tengu_1p_event_batch_config": {
+      "scheduledDelayMillis": 5000,
+      "maxExportBatchSize": 200,
+      "maxQueueSize": 8192
+    },
+    "tengu_mcp_tool_search": true,
+    "tengu_scratch": false,
+    "tengu_disable_bypass_permissions_mode": false,
+    "tengu_log_segment_events": false,
+    "tengu_log_datadog_events": true,
+    "tengu_event_sampling_config": {},
+    "tengu_tool_pear": false,
+    "tengu_thinkback": false,
+    "enhanced_telemetry_beta": false,
+    "tengu_tool_search_unsupported_models": null,
+    "tengu_ant_attribution_header_new": true,
+    "tengu_vscode_review_upsell": false,
+    "tengu_vscode_onboarding": false,
+    "tengu_c4w_usage_limit_notifications_enabled": true,
+    "tengu_streaming_tool_execution2": false,
+    "tengu_pid_based_version_locking": true
+  },
+  "userID": "efcbb01bf13d74572bef942f67b512cf7ddcc991cefcc1130a9029f30ace6cd9",
+  "firstStartTime": "2026-01-15T21:02:03.977Z",
+  "sonnet45MigrationComplete": true,
+  "opus45MigrationComplete": true,
+  "opusProMigrationComplete": true,
+  "thinkingMigrationComplete": true,
+  "skillUsage": {
+    "init": {
+      "usageCount": 1,
+      "lastUsedAt": 1768510955891
+    }
+  },
+  "projects": {
+    "/home/brian/projects/DataCollector": {
+      "allowedTools": [],
+      "mcpContextUris": [],
+      "mcpServers": {},
+      "enabledMcpjsonServers": [],
+      "disabledMcpjsonServers": [],
+      "hasTrustDialogAccepted": false,
+      "projectOnboardingSeenCount": 0,
+      "hasClaudeMdExternalIncludesApproved": false,
+      "hasClaudeMdExternalIncludesWarningShown": false,
+      "exampleFiles": [
+        "cli.py",
+        "ingestion.py",
+        "schema.py",
+        "scheduler.py",
+        "gap_detection.py"
+      ],
+      "hasCompletedProjectOnboarding": true,
+      "exampleFilesGeneratedAt": 1768510957818
+    },
+    "/home/brian/projects/personal/generate-cv": {
+      "allowedTools": [],
+      "mcpContextUris": [],
+      "mcpServers": {},
+      "enabledMcpjsonServers": [],
+      "disabledMcpjsonServers": [],
+      "hasTrustDialogAccepted": false,
+      "projectOnboardingSeenCount": 0,
+      "hasClaudeMdExternalIncludesApproved": false,
+      "hasClaudeMdExternalIncludesWarningShown": false,
+      "exampleFiles": [
+        "gen_cv.js",
+        "gen_cover.js",
+        "cli.py",
+        "extractors.py",
+        "generator.py"
+      ],
+      "exampleFilesGeneratedAt": 1768750913381
+    }
+  },
+  "oauthAccount": {
+    "accountUuid": "550d643b-f8fb-4ccb-9ec7-ac6cad27a6e1",
+    "emailAddress": "cordiscobrian@gmail.com",
+    "organizationUuid": "8949414b-1eca-4d0c-9ad6-2a2791642fec",
+    "hasExtraUsageEnabled": false,
+    "billingType": "stripe_subscription",
+    "displayName": "Brian"
+  },
+  "s1mAccessCache": {
+    "8949414b-1eca-4d0c-9ad6-2a2791642fec": {
+      "hasAccess": false,
+      "hasAccessNotAsDefault": false,
+      "timestamp": 1768750911174
+    }
+  },
+  "groveConfigCache": {
+    "550d643b-f8fb-4ccb-9ec7-ac6cad27a6e1": {
+      "grove_enabled": true,
+      "timestamp": 1768750912802
+    }
+  }
+}
