@@ -34,7 +34,8 @@
 #battery,
 #pulseaudio,
 #custom-screenrecording-indicator,
-#custom-update {
+#custom-update,
+#custom-swaync {
   min-width: 12px;
   margin: 0 7.5px;
 }
