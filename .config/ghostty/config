@@ -48,8 +48,8 @@
 # # Just for example:
 # resize-overlay-duration = 4s 200ms
 #
-# Font
-font-family = "CaskaydiaMono Nerd Font"
+
+font-family = "SauceCodePro Nerd Font Mono"
 font-style = Bold
 font-size = 16
 font-feature = "liga=1, dlig=1, clig=1, calt=1"
@@ -106,5 +106,3 @@ keybind = alt+shift+enter=toggle_fullscreen
 working-directory = inherit
 window-inherit-working-directory = true
 # Misc
-
-
