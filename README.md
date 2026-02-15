@@ -64,19 +64,17 @@ Install at least one Nerd Font used by terminals/bar:
 sudo pacman -S --needed ttf-cascadia-code-nerd
 ```
 
-## Clone
+## Clone and install
+
+Cloning alone does not put files in place. Follow the steps below to place all tracked dotfiles into your `~/.config` and home directory (e.g. `~/.zshrc`, `~/.bashrc`, `~/.gitconfig`).
+
+### 1) Clone the repo (bare clone into `~/.config`)
 
 ```bash
 git clone --bare https://github.com/Web-Dev-Codi/dotfiles.git "$HOME/.config"
 ```
 
-## Install (Direct Checkout Into `$HOME`)
-
-This repo is applied directly to your home directory.
-
-- Tracked files are checked out into their real paths (`~/.config/...`, `~/.zshrc`, etc.)
-
-Create a helper command for this repo:
+### 2) Define the config helper
 
 ```bash
 cfg() {
@@ -84,7 +82,9 @@ cfg() {
 }
 ```
 
-### 1) Back up existing configs
+### 3) Back up existing configs
+
+Any conflicting files in your home or `~/.config` are moved to a timestamped backup so the checkout does not overwrite them without notice.
 
 ```bash
 backup_dir="$HOME/.dotfiles-backup-$(date +%Y%m%d-%H%M%S)"
@@ -99,14 +99,16 @@ done < <(cfg ls-tree -r --name-only HEAD)
 printf '%s\n' "$backup_dir"
 ```
 
-### 2) Check out files into your home directory
+### 4) Check out files into `~/.config` and home
+
+This step writes all repo files to their final paths under `$HOME` (including `~/.config/...`).
 
 ```bash
 cfg checkout
 cfg config status.showUntrackedFiles no
 ```
 
-### 3) Personalize git identity
+### 5) Personalize git identity
 
 Do not keep someone else's identity in your Git config:
 
@@ -115,7 +117,7 @@ git config --global user.name 'Your Name'
 git config --global user.email 'you@example.com'
 ```
 
-### 4) Start and verify
+### 6) Start and verify
 
 Log out and start a Hyprland session, then validate:
 
