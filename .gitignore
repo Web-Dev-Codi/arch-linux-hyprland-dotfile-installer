@@ -73,3 +73,5 @@ test_suite_analysis/
 .config/test_suite_analysis/*
 .config/Windsurf/*
 .config/yay/*
+
+.wakatime.cfg
