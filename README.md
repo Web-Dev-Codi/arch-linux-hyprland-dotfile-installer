@@ -32,8 +32,8 @@ This README documents the committed state of this repository and gives a hardwar
 flowchart TD
   cloneRepo[Clone Repo] --> installPkgs[Install Arch Packages]
   installPkgs --> backupConfigs[Backup Existing Configs]
-  backupConfigs --> linkConfigs[Link Dotfiles]
-  linkConfigs --> loginHypr[Start Hyprland Session]
+  backupConfigs --> checkoutHome[Checkout Files Into Home]
+  checkoutHome --> loginHypr[Start Hyprland Session]
   loginHypr --> verifyCore[Verify Core Services]
   verifyCore --> tuneHardware[Tune Monitors Input GPU]
 ```
@@ -67,55 +67,43 @@ sudo pacman -S --needed ttf-cascadia-code-nerd
 ## Clone
 
 ```bash
-git clone https://github.com/Web-Dev-Codi/dotfiles.git "$HOME/dotfiles"
-cd "$HOME/dotfiles"
+git clone --bare https://github.com/Web-Dev-Codi/dotfiles.git "$HOME/.config"
 ```
 
-## Install (Safe Symlink Method)
+## Install (Direct Checkout Into `$HOME`)
+
+This repo is applied directly to your home directory.
+
+- Tracked files are checked out into their real paths (`~/.config/...`, `~/.zshrc`, etc.)
+
+Create a helper command for this repo:
+
+```bash
+cfg() {
+  git --git-dir="$HOME/.config" --work-tree="$HOME" "$@"
+}
+```
 
 ### 1) Back up existing configs
 
 ```bash
 backup_dir="$HOME/.dotfiles-backup-$(date +%Y%m%d-%H%M%S)"
-mkdir -p "$backup_dir/.config"
-targets=(
-  "$HOME/.zshrc"
-  "$HOME/.bashrc"
-  "$HOME/.config/hypr"
-  "$HOME/.config/waybar"
-  "$HOME/.config/wlogout"
-  "$HOME/.config/swaync"
-  "$HOME/.config/zshrc"
-  "$HOME/.config/bashrc"
-  "$HOME/.config/fish"
-  "$HOME/.config/nvim"
-  "$HOME/.config/kitty"
-  "$HOME/.config/ghostty"
-  "$HOME/.config/fastfetch"
-  "$HOME/.config/btop"
-  "$HOME/.config/fcitx5"
-  "$HOME/.config/environment.d"
-)
-for target in "${targets[@]}"; do
+mkdir -p "$backup_dir"
+while IFS= read -r rel; do
+  target="$HOME/$rel"
   if [ -e "$target" ] || [ -L "$target" ]; then
-    rel="${target#$HOME/}"
     mkdir -p "$backup_dir/$(dirname "$rel")"
     mv "$target" "$backup_dir/$rel"
   fi
-done
+done < <(cfg ls-tree -r --name-only HEAD)
 printf '%s\n' "$backup_dir"
 ```
 
-### 2) Link reusable dotfiles
+### 2) Check out files into your home directory
 
 ```bash
-repo="$HOME/dotfiles"
-mkdir -p "$HOME/.config"
-for dir in hypr waybar wlogout swaync zshrc bashrc fish nvim kitty ghostty fastfetch btop fcitx5 environment.d walker nwg-dock-hyprland nwg-displays waypaper satty qalculate swayosd; do
-  ln -sfn "$repo/.config/$dir" "$HOME/.config/$dir"
-done
-ln -sfn "$repo/.zshrc" "$HOME/.zshrc"
-ln -sfn "$repo/.bashrc" "$HOME/.bashrc"
+cfg checkout
+cfg config status.showUntrackedFiles no
 ```
 
 ### 3) Personalize git identity
@@ -168,32 +156,6 @@ Recommended adaptation steps:
 rm -f "$HOME/.config/hypr/hyprpaper/persistent-wallpaper.conf"
 ```
 
-## Optional Integrations
-
-Some scripts reference external ecosystems:
-
-- `ML4W` paths under `~/.config/ml4w`
-- `Omarchy` theme paths under `~/.config/omarchy`
-
-Core Hyprland + Waybar config works without these, but helper scripts/aliases and theme imports may need adjustment if those ecosystems are not installed.
-
-## Security and Sanitization
-
-This repository may contain machine-state or sensitive app files that should not be shared or linked by default in a public setup.
-
-Before publishing a fork, audit and sanitize files like:
-
-- `.config/opencode/opencode.json`
-- `.config/pulse/cookie`
-- `.config/Typora/*`
-- `.config/uv/uv-receipt.json`
-- `.config/yay`
-
-General rule:
-
-- Never commit API keys, tokens, cookies, private credentials, or host-specific secrets.
-- Keep reusable configs in version control and keep personal state local.
-
 ## Troubleshooting
 
 ### Waybar does not start
@@ -237,8 +199,10 @@ command -v satty
 ## Updating Dotfiles
 
 ```bash
-cd "$HOME/dotfiles"
-git pull --ff-only
+cfg() {
+  git --git-dir="$HOME/.config" --work-tree="$HOME" "$@"
+}
+cfg pull --ff-only
 hyprctl reload
 ```
 
