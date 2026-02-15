@@ -26,6 +26,36 @@ This README documents the committed state of this repository and gives a hardwar
 | `.zshrc`, `.bashrc` | Root shell entrypoints |
 | `.gitconfig` | Git defaults (must be personalized before use) |
 
+## Neovim configuration
+
+The Neovim setup in this repo is **fully available** after you run the clone-and-install steps. Nothing is omitted: the same config you get from the repo is the one used day to day.
+
+- **Base:** [LazyVim](https://github.com/LazyVim/LazyVim) on [lazy.nvim](https://github.com/folke/lazy.nvim). Default colorschemes installed: **Tokyo Night** and **Habamax** (LazyVim’s default).
+- **Location:** `~/.config/nvim` (or `$HOME/.config/nvim`). Entry point is `init.lua`; plugins and options live under `lua/config/` and `lua/plugins/`.
+- **Custom options:** Swap files are disabled (`opt.swapfile = false`) in `lua/config/options.lua`. All other LazyVim defaults (keymaps, autocmds) are in use unless you override them.
+
+### LazyVim extras included
+
+The config enables a broad set of LazyVim “extras” so language support, AI, and editor features work out of the box. These are declared in `lazyvim.json` and loaded via LazyVim’s plugin spec.
+
+| Category | Extras |
+| --- | --- |
+| **AI** | Copilot, Copilot Chat, Sidekick |
+| **Coding** | Luasnip, mini-comment, mini-snippets, mini-surround, Neogen, nvim-cmp, yanky |
+| **Debug (DAP)** | Core DAP, nlua |
+| **Editor** | Aerial, dial, inc-rename, mini-diff, mini-files, mini-move, navic, refactoring |
+| **Formatting** | Prettier |
+| **Languages** | Docker, Git, Markdown, PHP, Python, Rust, SQL, Svelte, Tailwind, TOML, TypeScript, Typst, YAML, Zig |
+| **Linting** | ESLint |
+| **Testing** | Test core |
+| **UI** | Edgy, indent-blankline, mini-animate, mini-indentscope, mini-starter, smear-cursor, treesitter-context |
+| **Utilities** | dot, mini-hipatterns, startuptime |
+| **Other** | VSCode-style extras |
+
+LSP servers and tools (e.g. for the languages above) are installed on demand via **Mason** when you open the relevant file types; you don’t need to pre-install them elsewhere.
+
+For LazyVim usage, keymaps, and plugin docs, see the [LazyVim documentation](https://lazyvim.github.io/installation).
+
 ## Install Flow
 
 ```mermaid
