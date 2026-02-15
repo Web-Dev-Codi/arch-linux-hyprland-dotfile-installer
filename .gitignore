@@ -75,3 +75,5 @@ test_suite_analysis/
 .config/yay/*
 
 .wakatime.cfg
+
+.cargo/*
