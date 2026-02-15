@@ -15,8 +15,8 @@ finder() {
 }
 
 # -----------------------------------------------------
-# Fastfetch
+# Fastfetch (skip inside tmux)
 # -----------------------------------------------------
-if [[ $(tty) == *"pts"* ]]; then
+if [[ $(tty) == *"pts"* ]] && [[ -z "${TMUX:-}" ]]; then
     fastfetch
 fi
