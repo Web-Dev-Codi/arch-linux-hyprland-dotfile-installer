@@ -12,6 +12,7 @@
     "custom/screenrecording-indicator",
   ],
   "modules-right": [
+    "custom/swaync",
     "group/tray-expander",
     "bluetooth",
     "network",
@@ -45,6 +46,26 @@
     "format": "⏻",
     "on-click": "wlogout",
     "tooltip": false,
+  },
+  "custom/swaync": {
+    "tooltip": false,
+    "format": "{icon} {}",
+    "format-icons": {
+      "notification": "\ud83d\udd14",
+      "none": "\ud83d\udd15",
+      "dnd-notification": "\ud83d\udd15",
+      "dnd-none": "\ud83d\udd15",
+      "inhibited-notification": "\ud83d\udd14",
+      "inhibited-none": "\ud83d\udd15",
+      "dnd-inhibited-notification": "\ud83d\udd15",
+      "dnd-inhibited-none": "\ud83d\udd15"
+    },
+    "return-type": "json",
+    "exec-if": "which swaync-client",
+    "exec": "swaync-client -swb",
+    "on-click": "sleep 0.1 && swaync-client -t -sw",
+    "on-click-right": "sleep 0.1 && swaync-client -d -sw",
+    "escape": true
   },
   "cpu": {
     "interval": 5,
