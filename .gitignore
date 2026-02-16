@@ -79,3 +79,5 @@ test_suite_analysis/
 .cargo/*
 
 Downloads/
+
+.ollama/*
