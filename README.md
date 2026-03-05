@@ -91,7 +91,7 @@ For LazyVim usage, keymaps, and plugin docs, see the [LazyVim documentation](htt
 
 ## Prerequisites (Arch Linux)
 
-The packages below are installed automatically when you run `install.sh`. This section is a reference for what gets installed.
+These packages are installed automatically by `install.sh`. The list below is for reference only.
 
 Install base dependencies with `pacman`:
 
@@ -136,6 +136,7 @@ bash install.sh
 
 The script walks you through each phase with interactive prompts:
 
+- **Phase 0** — Verifies you are on Arch Linux and not running as root
 - **Phase 1** — Install `yay` (AUR helper) if not already present
 - **Phase 2** — Install all Arch Linux prerequisites via `pacman`
 - **Phase 3** — Optional packages (firefox-developer-edition, hyprlauncher, oh-my-posh)
@@ -238,11 +239,11 @@ command -v satty
 Pull the latest changes and re-run the installer:
 
 ```bash
-git pull
+git pull origin main
 bash install.sh
 ```
 
-The installer will back up any configs it would overwrite before copying. If an update breaks your setup, restore from the backup directory printed at the end of the install run.
+The installer will back up any configs it would overwrite before copying. If an update breaks your setup, restore from the backup directory printed at the end of the install run (only created if existing configs were overwritten).
 
 ---
 
