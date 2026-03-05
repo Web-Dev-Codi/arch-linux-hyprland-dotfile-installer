@@ -1,4 +1,4 @@
-![Banner](https://capsule-render.vercel.app/api?type=waving&color=1793D1,0F172A,4A90D9&height=220&section=header&text=Arch%20Linux%20%2B%20Hyprland%20Dotfiles&fontSize=42&fontColor=ffffff&animation=fadeIn&fontAlignY=38&desc=Production-ready%20Hyprland%20setup%20for%20Arch%20Linux&descAlignY=58&descSize=18)
+![Banner](https://capsule-render.vercel.app/api?type=waving&color=1793D1,0F172A,4A90D9&height=220&section=header&text=Arch%20Linux%20%2B%20Hyprland%20Dotfiles&fontSize=42&fontColor=ffffff&animation=fadeIn&fontAlignY=38&desc=Production-ready%20Hyprland%20setup%20for%20Arch%20Linux&descAlignY=58&descFontSize=18)
 
 <div align="center">
 
@@ -6,7 +6,7 @@
 [![Hyprland](https://img.shields.io/badge/Hyprland-58E1FF?style=for-the-badge&logo=wayland&logoColor=black)](https://hyprland.org)
 [![Neovim](https://img.shields.io/badge/Neovim_LazyVim-57A143?style=for-the-badge&logo=neovim&logoColor=white)](https://lazyvim.github.io)
 [![Shell](https://img.shields.io/badge/Shell-Zsh%20%7C%20Fish%20%7C%20Bash-89DCEB?style=for-the-badge&logo=gnubash&logoColor=black)](https://www.zsh.org)
-[![License](https://img.shields.io/github/license/Web-Dev-Codi/arch-linux-hyprland-dotfile-installer?style=for-the-badge&color=FF2D78&labelColor=0A0A1A)](LICENSE)
+[![License](https://img.shields.io/github/license/Web-Dev-Codi/arch-linux-hyprland-dotfile-installer?style=for-the-badge&color=FF2D78&labelColor=0A0A1A)](https://github.com/Web-Dev-Codi/arch-linux-hyprland-dotfile-installer/blob/main/LICENSE)
 [![Last Commit](https://img.shields.io/github/last-commit/Web-Dev-Codi/arch-linux-hyprland-dotfile-installer?style=for-the-badge&color=00D4FF&labelColor=0A0A1A)](https://github.com/Web-Dev-Codi/arch-linux-hyprland-dotfile-installer/commits/main)
 [![Stars](https://img.shields.io/github/stars/Web-Dev-Codi/arch-linux-hyprland-dotfile-installer?style=for-the-badge&color=FFD700&labelColor=0A0A1A)](https://github.com/Web-Dev-Codi/arch-linux-hyprland-dotfile-installer/stargazers)
 
