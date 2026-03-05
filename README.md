@@ -150,19 +150,23 @@ cfg() {
 
 Add this function to your shell config so it persists across terminal sessions:
 
+**Zsh / Bash** — add to `~/.zshrc` or `~/.bashrc`:
+
 ```bash
-# Zsh / Bash — add to ~/.zshrc or ~/.bashrc
 cfg() {
   git --git-dir="$HOME/.config" --work-tree="$HOME" "$@"
 }
+```
 
-# Fish — add to ~/.config/fish/config.fish
+**Fish** — add to `~/.config/fish/config.fish`:
+
+```fish
 function cfg
   git --git-dir="$HOME/.config" --work-tree="$HOME" $argv
 end
 ```
 
-Then reload your shell: `source ~/.zshrc` (or `source ~/.bashrc`, or restart fish).
+Then reload your shell (`source ~/.zshrc`, `source ~/.bashrc`, or restart fish) so `cfg` is available in future terminal sessions.
 
 ### 3) Back up existing configs
 
@@ -190,7 +194,7 @@ cfg checkout
 cfg config status.showUntrackedFiles no
 ```
 
-If `cfg checkout` exits with errors about existing files not caught by the backup step, re-run the backup script from Step 3 then retry. As a last resort (no backup, overwrites conflicts):
+If `cfg checkout` exits with errors about existing files not caught by the backup step, re-run the backup script from Step 3 then retry. As a last resort — **no backup, overwrites all tracked files with their HEAD versions**:
 
 ```bash
 cfg checkout -- .
@@ -204,7 +208,7 @@ ls ~/.config/hypr/
 ls ~/.config/waybar/
 ```
 
-You should see no untracked conflicts in `cfg status` and both config directories should be populated.
+You should see a clean working tree in `cfg status` (no modified or deleted tracked files) and both config directories should be populated.
 
 ### 5) Personalize git identity
 
