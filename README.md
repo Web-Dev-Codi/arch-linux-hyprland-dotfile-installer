@@ -24,9 +24,8 @@
 - [Highlights](#highlights)
 - [Repository Layout](#repository-layout)
 - [Neovim Configuration](#neovim-configuration)
-- [Install Flow](#install-flow)
 - [Prerequisites](#prerequisites-arch-linux)
-- [Clone and Install](#clone-and-install)
+- [Install](#install)
 - [Hardware-Agnostic Setup Checklist](#hardware-agnostic-setup-checklist)
 - [Troubleshooting](#troubleshooting)
 - [Updating Dotfiles](#updating-dotfiles)
@@ -90,19 +89,9 @@ LSP servers and tools (e.g. for the languages above) are installed on demand via
 
 For LazyVim usage, keymaps, and plugin docs, see the [LazyVim documentation](https://lazyvim.github.io/installation).
 
-## Install Flow
-
-```mermaid
-flowchart TD
-  cloneRepo[Clone Repo] --> installPkgs[Install Arch Packages]
-  installPkgs --> backupConfigs[Backup Existing Configs]
-  backupConfigs --> checkoutHome[Checkout Files Into Home]
-  checkoutHome --> loginHypr[Start Hyprland Session]
-  loginHypr --> verifyCore[Verify Core Services]
-  verifyCore --> tuneHardware[Tune Monitors Input GPU]
-```
-
 ## Prerequisites (Arch Linux)
+
+The packages below are installed automatically when you run `install.sh`. This section is a reference for what gets installed.
 
 Install base dependencies with `pacman`:
 
@@ -128,89 +117,33 @@ Install at least one Nerd Font used by terminals/bar:
 sudo pacman -S --needed ttf-cascadia-code-nerd
 ```
 
-## Clone and Install
+## Install
 
-> **Run all steps as your regular user — not root.** Cloning as root puts files into `/root/.config` and breaks the install.
+> **Run as your regular user — not root.**
 
-Cloning alone does not put files in place. Follow the steps below to place all tracked dotfiles into your `~/.config` and home directory (e.g. `~/.zshrc`, `~/.bashrc`, `~/.gitconfig`).
-
-### 1) Clone the repo (bare clone into `~/.config`)
+### 1) Clone the repo
 
 ```bash
-git clone --bare https://github.com/Web-Dev-Codi/dotfiles.git "$HOME/.config"
+git clone https://github.com/Web-Dev-Codi/arch-linux-hyprland-dotfile-installer.git
+cd arch-linux-hyprland-dotfile-installer
 ```
 
-### 2) Define the config helper
+### 2) Run the installer
 
 ```bash
-cfg() {
-  git --git-dir="$HOME/.config" --work-tree="$HOME" "$@"
-}
+bash install.sh
 ```
 
-Add this function to your shell config so it persists across terminal sessions:
+The script walks you through each phase with interactive prompts:
 
-**Zsh / Bash** — add to `~/.zshrc` or `~/.bashrc`:
+- **Phase 1** — Install `yay` (AUR helper) if not already present
+- **Phase 2** — Install all Arch Linux prerequisites via `pacman`
+- **Phase 3** — Optional packages (firefox-developer-edition, hyprlauncher, oh-my-posh)
+- **Phase 4** — Nerd Font installation
+- **Phase 5** — Backup any existing configs that would be overwritten
+- **Phase 6** — Copy all dotfiles to their correct locations in `$HOME`
 
-```bash
-cfg() {
-  git --git-dir="$HOME/.config" --work-tree="$HOME" "$@"
-}
-```
-
-**Fish** — add to `~/.config/fish/config.fish`:
-
-```fish
-function cfg
-  git --git-dir="$HOME/.config" --work-tree="$HOME" $argv
-end
-```
-
-Then reload your shell (`source ~/.zshrc`, `source ~/.bashrc`, or restart fish) so `cfg` is available in future terminal sessions.
-
-### 3) Back up existing configs
-
-Any conflicting files in your home or `~/.config` are moved to a timestamped backup so the checkout does not overwrite them without notice.
-
-```bash
-backup_dir="$HOME/.dotfiles-backup-$(date +%Y%m%d-%H%M%S)"
-mkdir -p "$backup_dir"
-while IFS= read -r rel; do
-  target="$HOME/$rel"
-  if [ -e "$target" ] || [ -L "$target" ]; then
-    mkdir -p "$backup_dir/$(dirname "$rel")"
-    mv "$target" "$backup_dir/$rel"
-  fi
-done < <(cfg ls-tree -r --name-only HEAD)
-printf '%s\n' "$backup_dir"
-```
-
-### 4) Check out files into `~/.config` and home
-
-This step writes all repo files to their final paths under `$HOME` (including `~/.config/...`).
-
-```bash
-cfg checkout
-cfg config status.showUntrackedFiles no
-```
-
-If `cfg checkout` exits with errors about existing files not caught by the backup step, re-run the backup script from Step 3 then retry. As a last resort — **no backup, overwrites all tracked files with their HEAD versions**:
-
-```bash
-cfg checkout -- .  # WARNING: overwrites all tracked files without backup
-```
-
-**Verify the checkout succeeded:**
-
-```bash
-cfg status
-ls ~/.config/hypr/
-ls ~/.config/waybar/
-```
-
-You should see a clean working tree in `cfg status` (no modified or deleted tracked files) and both config directories should be populated.
-
-### 5) Personalize git identity
+### 3) Personalize git identity
 
 Do not keep someone else's identity in your Git config:
 
@@ -219,7 +152,7 @@ git config --global user.name 'Your Name'
 git config --global user.email 'you@example.com'
 ```
 
-### 6) Start and verify
+### 4) Start and verify
 
 Log out and start a Hyprland session, then validate:
 
@@ -302,14 +235,14 @@ command -v satty
 
 ## Updating Dotfiles
 
-Ensure `cfg` is defined in your shell (see [Step 2](#2-define-the-config-helper)), then:
+Pull the latest changes and re-run the installer:
 
 ```bash
-cfg pull --ff-only
-hyprctl reload
+git pull
+bash install.sh
 ```
 
-If an update breaks your setup, restore from your backup directory created during install.
+The installer will back up any configs it would overwrite before copying. If an update breaks your setup, restore from the backup directory printed at the end of the install run.
 
 ---
 
