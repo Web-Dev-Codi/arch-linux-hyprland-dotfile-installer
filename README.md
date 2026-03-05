@@ -12,7 +12,7 @@
 
 </div>
 
----
+> Production-ready dotfiles for Arch Linux with Hyprland, modular shell configs (Zsh, Bash, Fish), Neovim (LazyVim), and a clear hardware-agnostic install path.
 
 <!-- TODO: Add a screenshot or GIF of your Hyprland desktop here -->
 <!-- Example: ![Desktop Preview](assets/preview.png) -->
@@ -197,7 +197,7 @@ cfg config status.showUntrackedFiles no
 If `cfg checkout` exits with errors about existing files not caught by the backup step, re-run the backup script from Step 3 then retry. As a last resort — **no backup, overwrites all tracked files with their HEAD versions**:
 
 ```bash
-cfg checkout -- .
+cfg checkout -- .  # WARNING: overwrites all tracked files without backup
 ```
 
 **Verify the checkout succeeded:**
