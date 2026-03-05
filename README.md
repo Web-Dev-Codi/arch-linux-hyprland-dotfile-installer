@@ -123,7 +123,7 @@ Install at least one Nerd Font used by terminals/bar:
 sudo pacman -S --needed ttf-cascadia-code-nerd
 ```
 
-## Clone and install
+## Clone and Install
 
 Cloning alone does not put files in place. Follow the steps below to place all tracked dotfiles into your `~/.config` and home directory (e.g. `~/.zshrc`, `~/.bashrc`, `~/.gitconfig`).
 
