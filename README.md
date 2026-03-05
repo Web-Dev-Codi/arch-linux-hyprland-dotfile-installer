@@ -130,6 +130,8 @@ sudo pacman -S --needed ttf-cascadia-code-nerd
 
 ## Clone and Install
 
+> **Run all steps as your regular user — not root.** Cloning as root puts files into `/root/.config` and breaks the install.
+
 Cloning alone does not put files in place. Follow the steps below to place all tracked dotfiles into your `~/.config` and home directory (e.g. `~/.zshrc`, `~/.bashrc`, `~/.gitconfig`).
 
 ### 1) Clone the repo (bare clone into `~/.config`)
@@ -145,6 +147,22 @@ cfg() {
   git --git-dir="$HOME/.config" --work-tree="$HOME" "$@"
 }
 ```
+
+Add this function to your shell config so it persists across terminal sessions:
+
+```bash
+# Zsh / Bash — add to ~/.zshrc or ~/.bashrc
+cfg() {
+  git --git-dir="$HOME/.config" --work-tree="$HOME" "$@"
+}
+
+# Fish — add to ~/.config/fish/config.fish
+function cfg
+  git --git-dir="$HOME/.config" --work-tree="$HOME" $argv
+end
+```
+
+Then reload your shell: `source ~/.zshrc` (or `source ~/.bashrc`, or restart fish).
 
 ### 3) Back up existing configs
 
@@ -171,6 +189,22 @@ This step writes all repo files to their final paths under `$HOME` (including `~
 cfg checkout
 cfg config status.showUntrackedFiles no
 ```
+
+If `cfg checkout` exits with errors about existing files not caught by the backup step, re-run the backup script from Step 3 then retry. As a last resort (no backup, overwrites conflicts):
+
+```bash
+cfg checkout -- .
+```
+
+**Verify the checkout succeeded:**
+
+```bash
+cfg status
+ls ~/.config/hypr/
+ls ~/.config/waybar/
+```
+
+You should see no untracked conflicts in `cfg status` and both config directories should be populated.
 
 ### 5) Personalize git identity
 
@@ -264,10 +298,9 @@ command -v satty
 
 ## Updating Dotfiles
 
+Ensure `cfg` is defined in your shell (see [Step 2](#2-define-the-config-helper)), then:
+
 ```bash
-cfg() {
-  git --git-dir="$HOME/.config" --work-tree="$HOME" "$@"
-}
 cfg pull --ff-only
 hyprctl reload
 ```
