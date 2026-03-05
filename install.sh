@@ -37,6 +37,9 @@ ask() {
 # ─── Self-location ────────────────────────────────────────────────────────────
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+# ─── Cleanup trap ─────────────────────────────────────────────────────────────
+trap 'rm -rf /tmp/yay-build' EXIT
+
 # ─── Phase 0: Safety checks ───────────────────────────────────────────────────
 if [[ $EUID -eq 0 ]]; then
   print_error "Do not run this script as root. Run as your regular user."
@@ -82,7 +85,7 @@ fi
 print_header "Phase 2 — Arch Linux Prerequisites"
 
 if ask "Install all prerequisites via pacman?"; then
-  sudo pacman -S --needed \
+  sudo pacman -S --needed --noconfirm \
     hyprland hyprpaper hypridle hyprlock \
     waybar wlogout swaync walker wofi nautilus \
     grim slurp satty jq brightnessctl playerctl \
@@ -106,7 +109,7 @@ fi
 
 if command -v yay &>/dev/null; then
   if ask "Install AUR optional packages (hyprlauncher, oh-my-posh)?" N; then
-    yay -S --needed hyprlauncher oh-my-posh-bin
+    yay -S --needed --noconfirm hyprlauncher oh-my-posh-bin
     print_success "AUR optional packages installed."
   fi
 else
@@ -124,6 +127,7 @@ else
 fi
 
 # ─── Phase 5: Backup existing configs ────────────────────────────────────────
+shopt -s nullglob
 print_header "Phase 5 — Backup Existing Configs"
 
 backup_dir="$HOME/.dotfiles-backup-$(date +%Y%m%d-%H%M%S)"
@@ -168,8 +172,12 @@ for item in "$SCRIPT_DIR"/.config/*/; do
 done
 
 for dotfile in .zshrc .bashrc; do
-  cp "$SCRIPT_DIR/$dotfile" "$HOME/$dotfile"
-  print_success "~/$dotfile"
+  if [[ -f "$SCRIPT_DIR/$dotfile" ]]; then
+    cp "$SCRIPT_DIR/$dotfile" "$HOME/$dotfile"
+    print_success "~/$dotfile"
+  else
+    print_warning "~/$dotfile not found in repo, skipping."
+  fi
 done
 
 # ─── Phase 7: Post-install summary ───────────────────────────────────────────
