@@ -67,6 +67,9 @@ The Neovim setup in this repo is **fully available** after you run the clone-and
 
 The config enables a broad set of LazyVim “extras” so language support, AI, and editor features work out of the box. These are declared in `lazyvim.json` and loaded via LazyVim’s plugin spec.
 
+<details>
+<summary>View all LazyVim extras</summary>
+
 | Category | Extras |
 | --- | --- |
 | **AI** | Copilot, Copilot Chat, Sidekick |
@@ -80,6 +83,8 @@ The config enables a broad set of LazyVim “extras” so language support, AI, 
 | **UI** | Edgy, indent-blankline, mini-animate, mini-indentscope, mini-starter, smear-cursor, treesitter-context |
 | **Utilities** | dot, mini-hipatterns, startuptime |
 | **Other** | VSCode-style extras |
+
+</details>
 
 LSP servers and tools (e.g. for the languages above) are installed on demand via **Mason** when you open the relevant file types; you don’t need to pre-install them elsewhere.
 
