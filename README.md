@@ -12,6 +12,27 @@
 
 </div>
 
+---
+
+<!-- TODO: Add a screenshot or GIF of your Hyprland desktop here -->
+<!-- Example: ![Desktop Preview](assets/preview.png) -->
+
+---
+
+## Table of Contents
+
+- [Highlights](#highlights)
+- [Repository Layout](#repository-layout)
+- [Neovim Configuration](#neovim-configuration)
+- [Install Flow](#install-flow)
+- [Prerequisites](#prerequisites-arch-linux)
+- [Clone and Install](#clone-and-install)
+- [Hardware-Agnostic Setup Checklist](#hardware-agnostic-setup-checklist)
+- [Troubleshooting](#troubleshooting)
+- [Updating Dotfiles](#updating-dotfiles)
+
+---
+
 ## Highlights
 
 - Hyprland setup split into modular files for keybinds, input, visuals, autostart, monitors, workspaces, and app/window rules.
@@ -34,7 +55,7 @@
 | `.zshrc`, `.bashrc` | Root shell entrypoints |
 | `.gitconfig` | Git defaults (must be personalized before use) |
 
-## Neovim configuration
+## Neovim Configuration
 
 The Neovim setup in this repo is **fully available** after you run the clone-and-install steps. Nothing is omitted: the same config you get from the repo is the one used day to day.
 
