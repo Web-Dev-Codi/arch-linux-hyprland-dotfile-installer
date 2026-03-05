@@ -310,3 +310,13 @@ hyprctl reload
 ```
 
 If an update breaks your setup, restore from your backup directory created during install.
+
+---
+
+<div align="center">
+
+Made with ❤️ by [Web-Dev-Codi](https://github.com/Web-Dev-Codi) · Berlin, Germany 🇩🇪
+
+</div>
+
+![Footer](https://capsule-render.vercel.app/api?type=waving&color=4A90D9,0F172A,1793D1&height=120&section=footer)
