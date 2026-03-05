@@ -60,7 +60,7 @@
     },
     "return-type": "json",
     "exec-if": "which swaync-client",
-    "exec": "/home/brian/.config/waybar/scripts/swaync-status.sh",
+    "exec": "$HOME/.config/waybar/scripts/swaync-status.sh",
     "interval": 2,
     "on-click": "sleep 0.1 && swaync-client -t -sw",
     "on-click-right": "sleep 0.1 && swaync-client -d -sw",

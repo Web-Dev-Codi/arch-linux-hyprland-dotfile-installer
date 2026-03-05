@@ -1,1 +1,0 @@
-/home/brian/.local/share/omarchy/default/elephant/omarchy_themes.lua
