@@ -9,6 +9,9 @@ RED='\033[0;31m'
 BOLD='\033[1m'
 RESET='\033[0m'
 
+# Enable nullglob so unmatched globs expand to nothing instead of literally
+shopt -s nullglob
+
 # ─── Helpers ──────────────────────────────────────────────────────────────────
 print_header() {
   echo -e "\n${CYAN}${BOLD}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${RESET}"
@@ -87,7 +90,7 @@ print_header "Phase 2 — Arch Linux Prerequisites"
 if ask "Install all prerequisites via pacman?"; then
   sudo pacman -S --needed --noconfirm \
     hyprland hyprpaper hypridle hyprlock \
-    waybar wlogout swaync walker wofi nautilus \
+    waybar wlogout swaync wofi nautilus \
     grim slurp satty jq brightnessctl playerctl \
     pipewire wireplumber pavucontrol \
     networkmanager blueman rfkill polkit-kde-agent \
@@ -103,13 +106,13 @@ fi
 print_header "Phase 3 — Optional Packages"
 
 if ask "Install firefox-developer-edition?" N; then
-  sudo pacman -S --needed firefox-developer-edition
+  sudo pacman -S --needed --noconfirm firefox-developer-edition
   print_success "firefox-developer-edition installed."
 fi
 
 if command -v yay &>/dev/null; then
-  if ask "Install AUR optional packages (hyprlauncher, oh-my-posh)?" N; then
-    yay -S --needed --noconfirm hyprlauncher oh-my-posh-bin
+  if ask "Install AUR optional packages (walker, hyprlauncher, oh-my-posh)?" N; then
+    yay -S --needed --noconfirm walker hyprlauncher oh-my-posh-bin
     print_success "AUR optional packages installed."
   fi
 else
@@ -127,7 +130,6 @@ else
 fi
 
 # ─── Phase 5: Backup existing configs ────────────────────────────────────────
-shopt -s nullglob
 print_header "Phase 5 — Backup Existing Configs"
 
 backup_dir="$HOME/.dotfiles-backup-$(date +%Y%m%d-%H%M%S)"
